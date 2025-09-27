@@ -23,7 +23,7 @@ Your application brief description.
 # Technical information
 ## Stack
 This application uses the following technologies:
-- C# .Net
+- Golang
 - MongoDb
 - Redis
 
@@ -150,11 +150,11 @@ Where:
 - `--integration`: Run only integration tests
 - `--e2e`: Run only end to end tests
 - `--docker`: Run the tests in a Docker container
-- `--filter`: Run only the tests that match the provided [xunit filter](https://learn.microsoft.com/en-us/dotnet/core/testing/selective-unit-tests?pivots=xunit)
-- `--coverage`: Run the unit tests with coverage report using the [coverlet collector](https://github.com/coverlet-coverage/coverlet)
+- `--filter`: Run only the tests that match the provided [go build constraint](https://pkg.go.dev/go/build#hdr-Build_Constraints)
+- `--coverage`: Run the unit tests with coverage report
 
 **projects:**<br>
-Whitespace separated list of test `.csproj` to run.
+Whitespace separated list of test projects to run.
 
 **NOTES:**<br>
 - When running the tests with the flags `--docker` or `--cicd`, the tests will run inside a Docker container that will be in the `myapp_shared` network.
@@ -170,9 +170,7 @@ Where:
 **flags:**
 - `--docker` Build the coverage report in a Docker container
 
-Each test project's coverage report will be located inside a directory named `TestResults`, inside each test project's directory.
-
-The HTML coverage report is located inside the directory `./coverageReport`, which contains an `index.html` file.
+The coverage report is located inside the directory `./coverageReport`, which contains a `coverage.out` file and a `coverage.html` file.
 
 ## Project dependencies update validations
 To check for updates to the project dependencies and update them if needed, from the root of the project run the command
@@ -182,8 +180,7 @@ sh cli/dependencies_update.sh [flags]
 Where:
 
 **flags:**
-- `-u` | `--update`: Update all outdated dependencies. You will be prompted for each one for confirmation before updating
-- `-y`: Update all dependencies without prompting
+- `-u` | `--update`: Update all outdated dependencies.
 
 If the update flag is not provided, the script will print the report with all the dependencies that are outdated, but will not update any of them.
 
